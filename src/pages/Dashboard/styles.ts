@@ -1,7 +1,5 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import { shade } from "polished";
-
-import { ProSidebar, SidebarHeader, MenuItem } from "react-pro-sidebar";
 
 interface FooterIconsProps {
   isCollapsed: boolean;
@@ -12,8 +10,20 @@ export const Container = styled.div`
 `;
 
 export const Main = styled.main`
-  flex: 1%;
+  flex: 1;
   overflow-y: auto;
+  height: 100vh;
+
+  @media (min-width: 768px) {
+    .btn-hidden {
+      visibility: hidden;
+    }
+  }
+  @media (min-width: 1200px) {
+    .btn-hidden {
+      visibility: hidden;
+    }
+  }
 
   .btn-hidden {
     position: absolute;
@@ -21,11 +31,17 @@ export const Main = styled.main`
     right: 10px;
     z-index: 50;
   }
+
+  .btn-color-primary {
+    background-color: #ff9000;
+    &:hover {
+      background-color: ${shade(0.2, "#ff9000")};
+    }
+  }
 `;
 
-export const Grid = styled.main`
+export const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr; /* 1º coluna ocupa 2 vezes o tamanho */
   flex: 1;
   height: 100vh;
   gap: 10px;
@@ -37,21 +53,13 @@ export const Grid = styled.main`
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-
-    .btn-hidden {
-      visibility: hidden;
-    }
   }
   @media (min-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
-
-    .btn-hidden {
-      visibility: hidden;
-    }
   }
 `;
 

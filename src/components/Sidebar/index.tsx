@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import {
   SidebarFooter,
   SidebarContent,
@@ -6,6 +6,8 @@ import {
   SubMenu,
 } from "react-pro-sidebar";
 import { Scrollbars } from "react-custom-scrollbars";
+
+import { useSidebar } from "../../hooks/sidebar";
 
 import {
   FaTh,
@@ -33,19 +35,12 @@ import {
 } from "./styles";
 
 const Sidebar: React.FC = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isToggled, setIsToggled] = useState(false);
-
-  const handleToggleCollapse = useCallback(() => {
-    setIsCollapsed(!isCollapsed);
-  }, [isCollapsed]);
-
-  const handleToggleSidebar = useCallback(
-    (value) => {
-      setIsToggled(value);
-    },
-    [isToggled]
-  );
+  const {
+    isCollapsed,
+    isToggled,
+    handleToggleSidebar,
+    handleToggleCollapse,
+  } = useSidebar();
 
   return (
     <ProSidebarStyled
