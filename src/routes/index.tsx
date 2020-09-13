@@ -1,12 +1,12 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
+import React from "react";
+import { Switch } from "react-router-dom";
 
-import Route from './Route';
+import Route from "./Route";
 
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 
-import Dashboard from '../pages/Dashboard';
+import Home from "../pages/Home";
 
 const Routes: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const Routes: React.FC = () => {
       <Route path="/" exact component={SignIn} />
       <Route path="/signup" component={SignUp} />
 
-      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/home" component={Home} isPrivate />
     </Switch>
   );
 };
