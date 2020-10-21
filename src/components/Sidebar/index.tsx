@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   SidebarFooter,
   SidebarContent,
@@ -71,10 +72,21 @@ const Sidebar: React.FC = () => {
           <Menu iconShape="square">
             <MenuItemStyled active icon={<FaHome />}>
               Home
+              <Link to="/home" />
             </MenuItemStyled>
-            <MenuItemStyled icon={<FaTh />}>Overview</MenuItemStyled>
+            <MenuItemStyled icon={<FaTh />}>
+              Overview
+              <Link to="/home" />
+            </MenuItemStyled>
             <SubMenu title="Configuration" icon={<FaWrench />}>
-              <MenuItemStyled>Environment</MenuItemStyled>
+              <MenuItemStyled>
+                Environment
+                <Link to="/configuration/environment" />
+              </MenuItemStyled>
+              <MenuItemStyled>
+                Users
+                <Link to="/configuration/users" />
+              </MenuItemStyled>
             </SubMenu>
           </Menu>
         </Scrollbars>

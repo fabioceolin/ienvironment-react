@@ -7,7 +7,7 @@ interface AuthState {
 }
 
 interface SigInCredencials {
-  email: string;
+  login: string;
   password: string;
 }
 
@@ -31,11 +31,17 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post("sessions", {
-      email,
-      password,
-    });
+  const signIn = useCallback(async ({ login, password }) => {
+    const response = await api.post(
+      "users/login",
+      {
+        login,
+        password,
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const { token, user } = response.data;
 
     localStorage.setItem("@iEnvironment:token", token);

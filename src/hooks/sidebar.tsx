@@ -19,12 +19,9 @@ const SidebarProvider: React.FC = ({ children }) => {
     setIsCollapsed(!isCollapsed);
   }, [isCollapsed]);
 
-  const handleToggleSidebar = useCallback(
-    (value) => {
-      setIsToggled(value);
-    },
-    [isToggled]
-  );
+  const handleToggleSidebar = useCallback((value) => {
+    setIsToggled(value);
+  }, []);
 
   return (
     <SidebarContext.Provider

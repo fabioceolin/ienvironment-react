@@ -1,46 +1,8 @@
 import styled from "styled-components";
-import { shade } from "polished";
-
-import environmentImg from "../../assets/environment.svg";
 
 interface FooterIconsProps {
   isCollapsed: boolean;
 }
-
-export const Container = styled.div`
-  display: flex;
-`;
-
-export const Main = styled.main`
-  flex: 1;
-  overflow-y: auto;
-  height: 100vh;
-
-  @media (min-width: 768px) {
-    .btn-hidden {
-      visibility: hidden;
-    }
-  }
-  @media (min-width: 1200px) {
-    .btn-hidden {
-      visibility: hidden;
-    }
-  }
-
-  .btn-hidden {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 50;
-  }
-
-  .btn-color-primary {
-    background-color: #ff9000;
-    &:hover {
-      background-color: ${shade(0.2, "#ff9000")};
-    }
-  }
-`;
 
 export const Grid = styled.div`
   display: grid;
@@ -64,76 +26,86 @@ export const Grid = styled.div`
   }
 `;
 
-export const Card = styled.section`
+export const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  background-color: var(--color-box-base);
+  margin: 30px 0;
+  border-radius: 5px;
+`;
+
+export const CardHeader = styled.div`
+  margin: -30px 15px 0 15px;
+
+  img {
+    width: 100%;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),
+      0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    vertical-align: middle;
+  }
+`;
+
+export const CardBody = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 1rem 20px;
+
+  span {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--color-text-secundary);
+    text-align: justify;
+  }
+  div {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+
+    margin-top: 10px;
+
+    span {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 14px;
+    }
+  }
+`;
+
+export const CardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
-  background-color: ${shade(-0.2, "#312e38")};
-  padding: 40px;
-  overflow: hidden;
+  margin: 10px 15px 15px;
+  padding: 10px 10px 0 10px;
+  border-top: 1px solid var(--color-box-line-footer);
+  line-height: 22px;
+  color: var(--color-text-secundary);
+  font-size: 14px;
 
-  &:hover {
-    cursor: pointer;
-    background-color: ${shade(-0.4, "#312e38")};
-  }
-`;
-
-export const Content = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-
-  line-height: 1.5rem;
-
-  div + div {
+  div {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    letter-spacing: 1.5px;
-
-    margin-left: 20px;
-
-    span {
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
-
-  @media (max-width: 440px) {
-    img {
-      display: none;
-    }
-
-    div + div {
-      margin-left: 0px;
-    }
-  }
-`;
-
-export const ContentImage = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 250px;
-
-  overflow: hidden;
-  box-shadow: 0px 0px 38px 1px rgba(0, 0, 0, 0.75);
-
-  background-color: ${shade(-0.2, "#312e38")};
-
-  img {
-    height: 100%;
-    width: 100%;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
-  }
-`;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    cursor: pointer;
 
-export const ContentTitle = styled.span`
-  font-size: 30px;
-  margin-bottom: 2rem;
+    &:hover {
+      background-color: var(--color-primary-dark);
+      transition: background-color 0.2s;
+    }
+
+    svg {
+      color: #fff;
+    }
+  }
 `;

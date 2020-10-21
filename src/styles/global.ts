@@ -1,6 +1,19 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+  :root {
+    --color-background: #312e38;
+    --color-primary-light: #ffc146;
+    --color-primary: #ff9000;
+    --color-primary-dark: #cc7300;
+
+    --color-text-primary: #FFFFFF;
+    --color-text-secundary: #cccccc;
+    --color-text-button: #312e38;
+    --color-box-base: #3a3743;
+    --color-box-line-footer: #27242c
+}
+  
   * {
     margin: 0;
     padding: 0;
@@ -9,8 +22,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #312e38;
-    color: #FFF;
+    background: var(--color-background);
+    color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
   }
 
