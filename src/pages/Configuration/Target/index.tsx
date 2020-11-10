@@ -21,9 +21,6 @@ import {
   TdGroup,
   Input,
   // InputContainer,
-  Grid,
-  Container,
-  Groups,
 } from "./styles";
 
 interface GroupsProps {
@@ -31,10 +28,6 @@ interface GroupsProps {
   start: boolean;
   group: boolean;
   end: boolean;
-}
-
-interface CheckboxProps {
-  id: Array<string>;
 }
 
 interface SelectProps {
@@ -57,11 +50,11 @@ interface TableDataProps {
 const EnvironmentEdit: React.FC = () => {
   const [checked, setChecked] = useState([] as string[]);
   const [tableData, settableData] = useState<TableDataProps>({
-    groupCount: 1,
+    groupCount: 0,
     rows: [
       {
         id: 1,
-        groups: [{ id: 1, start: true, group: false, end: false }],
+        groups: [],
         logicals: [],
         fields: [
           { name: "Temperatura", value: "temperatura" },
@@ -72,35 +65,7 @@ const EnvironmentEdit: React.FC = () => {
       },
       {
         id: 2,
-        groups: [{ id: 1, start: false, group: true, end: false }],
-        logicals: [
-          { name: "And", value: "and" },
-          { name: "Or", value: "or" },
-        ],
-        fields: [
-          { name: "Temperatura", value: "temperatura" },
-          { name: "Umidade", value: "umidade" },
-          { name: "Luminosidade", value: "luminosidade" },
-          { name: "Presença", value: "presenca" },
-        ],
-      },
-      {
-        id: 3,
-        groups: [{ id: 1, start: false, group: true, end: false }],
-        logicals: [
-          { name: "And", value: "and" },
-          { name: "Or", value: "or" },
-        ],
-        fields: [
-          { name: "Temperatura", value: "temperatura" },
-          { name: "Umidade", value: "umidade" },
-          { name: "Luminosidade", value: "luminosidade" },
-          { name: "Presença", value: "presenca" },
-        ],
-      },
-      {
-        id: 4,
-        groups: [{ id: 1, start: false, group: false, end: true }],
+        groups: [],
         logicals: [
           { name: "And", value: "and" },
           { name: "Or", value: "or" },
@@ -152,7 +117,7 @@ const EnvironmentEdit: React.FC = () => {
 
   const handleGroup = useCallback(() => {
     const newTableData = tableData.rows.map((rows) => {
-      checked.map((check, index) => {
+      checked.sort().map((check, index) => {
         const checkQtd = checked.length - 1;
         console.log(
           "index: " +
@@ -200,6 +165,7 @@ const EnvironmentEdit: React.FC = () => {
       return rows;
     });
     console.log(newTableData);
+    console.log(tableData.groupCount + 1);
     settableData({ rows: newTableData, groupCount: tableData.groupCount + 1 });
   }, [tableData, checked]);
 

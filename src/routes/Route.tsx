@@ -5,6 +5,8 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import api from "../services/api";
+
 import { useAuth } from "../hooks/auth";
 
 interface RouteProps extends ReactDOMRouteProps {
@@ -17,12 +19,22 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { user, signOut, expirationTime } = useAuth();
 
   return (
     <ReactDOMRoute
       {...rest}
       render={({ location }) => {
+        if (Date.now() >= Date.parse(expirationTime)) {
+          signOut();
+        }
+        const token = localStorage.getItem("@iEnvironment:token");
+        console.log(token);
+        if (token) {
+          api.defaults.headers.common["x-access-token"] = token;
+        } else {
+          api.defaults.headers.common["x-access-token"] = null;
+        }
         return isPrivate === !!user ? (
           <Component />
         ) : (

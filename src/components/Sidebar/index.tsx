@@ -8,6 +8,7 @@ import {
 } from "react-pro-sidebar";
 import { Scrollbars } from "react-custom-scrollbars";
 
+import { useAuth } from "../../hooks/auth";
 import { useSidebar } from "../../hooks/sidebar";
 
 import {
@@ -42,6 +43,8 @@ const Sidebar: React.FC = () => {
     handleToggleSidebar,
     handleToggleCollapse,
   } = useSidebar();
+
+  const { signOut } = useAuth();
 
   return (
     <ProSidebarStyled
@@ -102,7 +105,7 @@ const Sidebar: React.FC = () => {
           <div>
             <FaCog />
           </div>
-          <div>
+          <div onClick={signOut}>
             <FaPowerOff />
           </div>
         </FooterIcons>

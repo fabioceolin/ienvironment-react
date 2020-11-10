@@ -1,9 +1,22 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
 import api from "../services/api";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  login: string;
+  password: string;
+  active: boolean;
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
+  expirationTime: string;
 }
 
 interface SigInCredencials {
@@ -12,7 +25,8 @@ interface SigInCredencials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: User;
+  expirationTime: string;
   signIn(credentials: SigInCredencials): Promise<void>;
   signOut(): void;
 }
@@ -23,41 +37,45 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem("@iEnvironment:token");
     const user = localStorage.getItem("@iEnvironment:user");
+    const expirationTime = localStorage.getItem("@iEnvironment:expirationTime");
 
-    if (token && user) {
-      return { token, user: JSON.parse(user) };
+    if (token && user && expirationTime) {
+      return { token, user: JSON.parse(user), expirationTime };
     }
 
     return {} as AuthState;
   });
 
   const signIn = useCallback(async ({ login, password }) => {
-    const response = await api.post(
-      "users/login",
-      {
-        login,
-        password,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    const { token, user } = response.data;
+    const response = await api.post("users/login", {
+      login,
+      password,
+    });
+    const { token, user, expirationTime } = response.data;
 
     localStorage.setItem("@iEnvironment:token", token);
     localStorage.setItem("@iEnvironment:user", JSON.stringify(user));
+    localStorage.setItem("@iEnvironment:expirationTime", expirationTime);
 
-    setData({ token, user });
+    setData({ token, user, expirationTime });
   }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem("@iEnvironment:token");
     localStorage.removeItem("@iEnvironment:user");
+    localStorage.removeItem("@iEnvironment:expirationTime");
 
     setData({} as AuthState);
   }, []);
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{
+        user: data.user,
+        signIn,
+        signOut,
+        expirationTime: data.expirationTime,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

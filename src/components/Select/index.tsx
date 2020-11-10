@@ -60,7 +60,7 @@ const Select: React.FC<SelectProps> = ({
         }
       },
     });
-  }, [fieldName, registerField]);
+  }, [fieldName, registerField, rest.isMulti]);
 
   return (
     <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>

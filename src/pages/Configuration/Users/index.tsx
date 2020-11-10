@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import MUIDataTable, { MUIDataTableMeta } from "mui-datatables";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Base from "../../../components/Base";
 import GridContainer from "../../../components/GridContainer";
 import GridItem from "../../../components/GridItem";
 
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import api from "../../../services/api";
 
 import { UserStatus } from "./styles";
 
+interface userData {
+  id: string;
+  name: string;
+  email: string;
+  login: string;
+  password: string;
+  active: boolean;
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const EnvironmentEdit: React.FC = () => {
+  const [users, setUsers] = useState<userData[]>([]);
+
   const theme = createMuiTheme({
     palette: {
       type: "dark",
@@ -33,11 +48,12 @@ const EnvironmentEdit: React.FC = () => {
   });
 
   const columns = [
-    { label: "Nome", name: "nome" },
-    { label: "Usuário", name: "usuario" },
+    { label: "Nome", name: "name" },
+    { label: "Usuário", name: "login" },
+    { label: "E-mail", name: "email" },
     {
       label: "Status",
-      name: "status",
+      name: "enabled",
       options: {
         filter: true,
         customBodyRender: (
@@ -47,35 +63,25 @@ const EnvironmentEdit: React.FC = () => {
         ) => {
           return (
             <UserStatus
-              isEnabled={value}
+              isEnabled={!value}
               onClick={() => {
-                updateValue(value ? false : true);
+                updateValue(value ? true : false);
               }}
             >
-              {value ? "Desativado" : "Ativado"}
+              {value ? "Ativado" : "Desativado"}
             </UserStatus>
           );
         },
       },
     },
   ];
-  const data = [
-    {
-      nome: "Fábio Ceolin",
-      usuario: "fabioceolin",
-      status: true,
-    },
-    {
-      nome: "Mateus Moura Santos",
-      usuario: "mateusms",
-      status: true,
-    },
-    {
-      nome: "Matheus Barreto",
-      usuario: "MateusB",
-      status: false,
-    },
-  ];
+
+  useEffect(() => {
+    api.get("/users").then((response) => {
+      // console.log(response);
+      setUsers(response.data);
+    });
+  }, []);
 
   return (
     <Base>
@@ -84,7 +90,7 @@ const EnvironmentEdit: React.FC = () => {
           <MuiThemeProvider theme={theme}>
             <MUIDataTable
               title={"Usuários"}
-              data={data}
+              data={users}
               columns={columns}
               options={{
                 filterType: "checkbox" as any,

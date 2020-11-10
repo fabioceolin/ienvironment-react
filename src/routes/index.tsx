@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
 import EnvironmentConfig from "../pages/Configuration/Environment";
 import EnvironmentEdit from "../pages/Configuration/EnvironmentEdit";
+import EnvironmentNew from "../pages/Configuration/EnvironmentNew";
 import Users from "../pages/Configuration/Users";
 import Target from "../pages/Configuration/Target";
 
@@ -30,6 +31,12 @@ const Routes: React.FC = () => {
         path="/configuration/environment/edit"
         exact
         component={EnvironmentEdit}
+        isPrivate
+      />
+      <Route
+        path="/configuration/environment/new"
+        exact
+        component={EnvironmentNew}
         isPrivate
       />
       <Route path="/configuration/users" exact component={Users} isPrivate />

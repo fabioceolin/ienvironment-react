@@ -31,8 +31,15 @@ export const CardHeader = styled.div`
   justify-content: space-between;
   margin: 10px;
 
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   svg {
     color: #cccccc;
+    margin-left: 5px;
 
     &:hover {
       color: var(--color-primary);
@@ -44,11 +51,19 @@ export const CardHeader = styled.div`
 
 export const CardContent = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  margin: 10px 10px 20px 10px;
+  margin: 0 10px;
   color: var(--color-text-secundary);
+
+  p {
+    height: 85px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+  }
 `;
 
 export const CardFooter = styled.div<CardFooterProps>`

@@ -11,7 +11,12 @@ export default createGlobalStyle`
     --color-text-secundary: #cccccc;
     --color-text-button: #312e38;
     --color-box-base: #3a3743;
-    --color-box-line-footer: #27242c
+    --color-box-line-footer: #27242c;
+
+    --color-success: #22bb33
+    --color-danger: #bb2124
+    --color-info: #5bc0de
+    --color-warning: #f0ad4e
 }
   
   * {
@@ -24,10 +29,15 @@ export default createGlobalStyle`
   body {
     background: var(--color-background);
     color: var(--color-text-primary);
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body, input, textarea, button {
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
   }
