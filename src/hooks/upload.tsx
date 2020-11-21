@@ -9,6 +9,7 @@ interface UploadContextData {
   addFile(file: FilesUploadedProps): void;
   removeFile(id: string): void;
   listAllFiles(): FilesUploadedProps[];
+  removeAllFiles(): void;
 }
 
 const UploadContext = createContext<UploadContextData>({} as UploadContextData);
@@ -25,22 +26,25 @@ const UploadProvider: React.FC = ({ children }) => {
 
       setFiles((state) => [...state, file]);
     },
-    [files]
+    []
   );
 
-  const removeFile = useCallback(
-    (id: string) => {
-      setFiles((state) => state.filter((file) => file.FileID !== id));
-    },
-    [files]
-  );
+  const removeFile = useCallback((id: string) => {
+    setFiles((state) => state.filter((file) => file.FileID !== id));
+  }, []);
+
+  const removeAllFiles = useCallback(() => {
+    setFiles([]);
+  }, []);
 
   const listAllFiles = useCallback(() => {
     return files;
   }, [files]);
 
   return (
-    <UploadContext.Provider value={{ addFile, listAllFiles, removeFile }}>
+    <UploadContext.Provider
+      value={{ addFile, listAllFiles, removeFile, removeAllFiles }}
+    >
       {children}
     </UploadContext.Provider>
   );

@@ -29,7 +29,6 @@ export const SidebarHeaderStyled = styled(SidebarHeader)`
 export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 10px;
 
   img {
     width: 90%;
@@ -43,15 +42,17 @@ export const UserContainer = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 72px;
   padding: 10px;
 
   img {
+    margin-left: 10px;
     height: 50px;
     border-radius: 50%;
   }
   div {
+    width: 100%;
     margin-left: 10px;
 
     display: flex;

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface CardFooterProps {
-  isNotEnabled?: boolean;
+  isEnabled?: boolean;
 }
 
 export const SubHeader = styled.div`
@@ -66,21 +66,43 @@ export const CardContent = styled.div`
   }
 `;
 
-export const CardFooter = styled.div<CardFooterProps>`
+export const CardFooter = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  margin: 10px 15px 15px;
-  padding: 10px 10px 0 0;
+  margin: 10px 15px;
+  padding: 10px 10px 0px 10px;
   border-top: 1px solid #27242c;
   line-height: 22px;
   font-size: 14px;
-  ${(props) =>
-    props.isNotEnabled
+`;
+
+export const TextFooter = styled.p<CardFooterProps>`
+  ${({ isEnabled = false }) =>
+    isEnabled
       ? css`
-          color: #ec644b;
+          color: #2ecc71;
         `
       : css`
-          color: #2ecc71;
+          color: #ec644b;
         `}
+`;
+
+export const IconFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+    transition: background-color 0.2s;
+  }
+
+  svg {
+    color: #fff;
+  }
 `;

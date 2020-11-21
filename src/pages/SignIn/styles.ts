@@ -38,7 +38,7 @@ export const AnimationContainer = styled.div`
   animation: ${appearFromLeft} 1s;
 
   form {
-    margin: 80px 0;
+    margin: 70px 0;
     width: 340px;
     text-align: center;
 
@@ -62,7 +62,7 @@ export const AnimationContainer = styled.div`
   > a {
     color: #ff9000;
     display: block;
-    margin-top: 24px;
+    margin-top: 10px;
     text-decoration: none;
     transition: color 0.2s;
 

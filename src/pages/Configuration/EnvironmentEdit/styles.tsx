@@ -43,20 +43,3 @@ export const Content = styled.div`
   width: 100%;
   margin-top: 20px;
 `;
-
-export const ModalContent = styled.div`
-  width: 100%;
-  padding: 20px;
-
-  form {
-    text-align: center;
-
-    h1 {
-      margin-bottom: 24px;
-    }
-  }
-`;
-
-export const ContainerButton = styled.div`
-  display: flex;
-`;

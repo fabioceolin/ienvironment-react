@@ -44,3 +44,29 @@ export const CheckboxGroup = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const EquipLink = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #ff9000;
+
+  cursor: pointer;
+
+  svg {
+    margin-right: 5px;
+  }
+`;
+
+export const Span = styled.span`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #94908d;
+`;

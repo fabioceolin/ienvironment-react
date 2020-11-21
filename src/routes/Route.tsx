@@ -29,7 +29,6 @@ const Route: React.FC<RouteProps> = ({
           signOut();
         }
         const token = localStorage.getItem("@iEnvironment:token");
-        console.log(token);
         if (token) {
           api.defaults.headers.common["x-access-token"] = token;
         } else {

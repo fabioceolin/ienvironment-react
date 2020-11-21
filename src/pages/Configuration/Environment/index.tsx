@@ -6,7 +6,7 @@ import GridContainer from "../../../components/GridContainer";
 import GridItem from "../../../components/GridItem";
 import Card from "../../../components/Card";
 
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaPlay } from "react-icons/fa";
 
 import api from "../../../services/api";
 
@@ -16,6 +16,8 @@ import {
   CardHeader,
   CardContent,
   CardFooter,
+  TextFooter,
+  IconFooter,
 } from "./styles";
 
 interface responseData {
@@ -36,11 +38,12 @@ const EnvironmentConfig: React.FC = () => {
   const [environments, setEnvironments] = useState<responseData[]>([]);
 
   const history = useHistory();
-  const handleNewEnvironment = () => {
-    history.push("/configuration/environment/new");
+
+  const handleEditEnvironment = (environmentID: string = "-1") => {
+    history.push(`/configuration/environment/new/${environmentID}`);
   };
-  const handleEditEnvironment = () => {
-    history.push("/configuration/environment/edit");
+  const handleConfigEnvironment = (environmentID: string = "-1") => {
+    history.push(`/configuration/environment/edit/${environmentID}`);
   };
 
   useEffect(() => {
@@ -54,21 +57,11 @@ const EnvironmentConfig: React.FC = () => {
       <GridContainer>
         <GridItem sm={12}>
           <SubHeader>
-            <Button onClick={handleNewEnvironment}>Novo Ambiente</Button>
+            <Button onClick={() => handleEditEnvironment()}>
+              Novo Ambiente
+            </Button>
           </SubHeader>
         </GridItem>
-        {/* <GridItem xs={12} sm={6} lg={4}>
-          <Card>
-            <CardHeader>
-              <h1>Sala 01</h1>
-              <FaEdit size={20} onClick={handleEditEnvironment} />
-            </CardHeader>
-            <CardContent>
-              <p>Descrição da sala com o que você quiser escrever</p>
-            </CardContent>
-            <CardFooter isNotEnabled>Desativado</CardFooter>
-          </Card>
-        </GridItem> */}
         {environments &&
           environments.map((environment) => (
             <GridItem xs={12} sm={6} lg={4} key={environment.id}>
@@ -76,17 +69,27 @@ const EnvironmentConfig: React.FC = () => {
                 <CardHeader>
                   <h2>{environment.name}</h2>
                   <div>
-                    <FaEdit size={20} onClick={handleEditEnvironment} />
+                    <FaEdit
+                      size={20}
+                      onClick={() => handleEditEnvironment(environment.id)}
+                    />
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p>{environment.description}</p>
                 </CardContent>
-                {environment.enabled ? (
-                  <CardFooter>Ativado</CardFooter>
-                ) : (
-                  <CardFooter isNotEnabled>Desativado</CardFooter>
-                )}
+                <CardFooter>
+                  {environment.enabled ? (
+                    <TextFooter isEnabled>Ativado</TextFooter>
+                  ) : (
+                    <TextFooter>Desativado</TextFooter>
+                  )}
+                  <IconFooter
+                    onClick={() => handleConfigEnvironment(environment.id)}
+                  >
+                    <FaPlay size={10} />
+                  </IconFooter>
+                </CardFooter>
               </Card>
             </GridItem>
           ))}

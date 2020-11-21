@@ -13,7 +13,6 @@ import { useSidebar } from "../../hooks/sidebar";
 
 import {
   FaTh,
-  FaHome,
   FaWrench,
   FaBell,
   FaCog,
@@ -23,7 +22,7 @@ import {
 
 import logoImg from "../../assets/logo.svg";
 import logoSImg from "../../assets/logo_s.svg";
-import avatarImg from "../../assets/mat.jpeg";
+import avatarImg from "../../assets/user.svg";
 
 import "react-pro-sidebar/dist/css/styles.css";
 
@@ -36,7 +35,11 @@ import {
   FooterIcons,
 } from "./styles";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  name?: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ name }) => {
   const {
     isCollapsed,
     isToggled,
@@ -61,11 +64,8 @@ const Sidebar: React.FC = () => {
           <img src={avatarImg} alt="User " />
           {!isCollapsed && (
             <div>
-              <span>
-                Mateus Moura
-                <strong> Santos</strong>
-              </span>
-              <span> Administrator</span>
+              <span>{name ? name : "Unknown"}</span>
+              <span style={{ color: "#666360" }}> Administrator</span>
             </div>
           )}
         </UserContainer>
@@ -73,11 +73,7 @@ const Sidebar: React.FC = () => {
       <SidebarContent>
         <Scrollbars autoHide>
           <Menu iconShape="square">
-            <MenuItemStyled active icon={<FaHome />}>
-              Home
-              <Link to="/home" />
-            </MenuItemStyled>
-            <MenuItemStyled icon={<FaTh />}>
+            <MenuItemStyled active icon={<FaTh />}>
               Overview
               <Link to="/home" />
             </MenuItemStyled>

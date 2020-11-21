@@ -1,5 +1,11 @@
 import React, { useCallback, useRef } from "react";
-import { FiArrowLeft, FiMail, FiLock, FiUser } from "react-icons/fi";
+import {
+  FiArrowLeft,
+  FiMail,
+  FiLock,
+  FiUser,
+  FiUserPlus,
+} from "react-icons/fi";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
 import * as Yup from "yup";
@@ -20,6 +26,7 @@ import { Container, Content, AnimationContainer, Background } from "./styles";
 
 interface SignUpFromData {
   name: string;
+  login: string;
   email: string;
   password: string;
 }
@@ -36,6 +43,7 @@ const SignUp: React.FC = () => {
 
         const schema = Yup.object().shape({
           name: Yup.string().required("Nome obrigatório!"),
+          login: Yup.string().required("Usuário obrigatório!"),
           email: Yup.string()
             .required("E-mail obrigatório!")
             .email("Digite um e-mail válido"),
@@ -43,6 +51,7 @@ const SignUp: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+        console.log(data);
 
         await api.post("/users", data);
 
@@ -84,6 +93,7 @@ const SignUp: React.FC = () => {
             <h1>Faça seu cadastro</h1>
 
             <Input name="name" icon={FiUser} placeholder="Nome" />
+            <Input name="login" icon={FiUserPlus} placeholder="Usuário" />
             <Input name="email" icon={FiMail} placeholder="E-mail" />
             <Input
               name="password"

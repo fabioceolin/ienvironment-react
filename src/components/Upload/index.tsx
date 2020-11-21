@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "./Layout";
 import FileList from "./FileList";
 import Input from "./Input";
@@ -26,7 +26,7 @@ const Upload: React.FC = () => {
   const { addFile, listAllFiles, removeFile } = useUpload();
 
   const getUploadParams: IDropzoneProps["getUploadParams"] = () => ({
-    url: "http://54.233.88.38:8080/api/file",
+    url: "http://localhost:8080/api/file",
   });
 
   const handleChangeStatus: IDropzoneProps["onChangeStatus"] = (

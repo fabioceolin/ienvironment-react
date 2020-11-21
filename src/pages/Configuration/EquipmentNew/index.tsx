@@ -12,48 +12,35 @@ import GridItem from "../../../components/GridItem";
 import Card from "../../../components/Card";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import Textarea from "../../../components/TextArea";
+import Select from "../../../components/Select";
 import Upload from "../../../components/Upload";
 
 import { useToast } from "../../../hooks/toast";
 import { useUpload } from "../../../hooks/upload";
 import getValidationErrors from "../../../utils/getValidationErrors";
 
-import {
-  HiOutlineInformationCircle,
-  HiOutlineOfficeBuilding,
-  HiArrowNarrowLeft,
-} from "react-icons/hi";
+import { HiArrowNarrowLeft } from "react-icons/hi";
+
+import { FaEdit } from "react-icons/fa";
 
 import api from "../../../services/api";
 
 import { Fieldset, Legend, Footer, CheckboxGroup } from "./styles";
 
-interface NewEnvironmentFormData {
-  nome: string;
-  descricao?: string;
-  enabled: boolean;
+interface NewEquipmentFormData {
+  name: String;
+  description: String;
+  type: String;
+  entityType: String;
+  topic: String;
+  simulationMode: boolean;
 }
 
 interface ParamsProps {
   environmentID: string;
 }
 
-interface ResponseProps {
-  equipments: Array<string>;
-  events: Array<string>;
-  numberOfEquipments: number;
-  equipmentsOnline: number;
-  img: string;
-  enabled: boolean;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-}
-
-const EnvironmentConfig: React.FC = () => {
+const EquipmentNew: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const { listAllFiles, removeAllFiles } = useUpload();
@@ -62,29 +49,19 @@ const EnvironmentConfig: React.FC = () => {
 
   useEffect(() => {
     removeAllFiles();
-
-    if (environmentID !== "-1") {
-      api
-        .get<ResponseProps>(`/environments/byid/${environmentID}`)
-        .then((response) => {
-          formRef.current?.setData({
-            nome: response.data.name,
-            descricao: response.data.description,
-            enabled: response.data.enabled,
-          });
-          console.log(response.data);
-        });
-    }
-  }, [environmentID, removeAllFiles]);
+  }, [removeAllFiles]);
 
   const handleSubmit = useCallback(
-    async (data: NewEnvironmentFormData) => {
+    async (data: NewEquipmentFormData) => {
       try {
         const images = listAllFiles();
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          nome: Yup.string().required("Nome obrigatório!"),
+          name: Yup.string().required("Nome obrigatório!"),
+          type: Yup.string().required("Caracteristica obrigatório!"),
+          entityType: Yup.string().required("Tipo obrigatório!"),
+          topic: Yup.string().required("Tópico MQTT obrigatório!"),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -92,40 +69,34 @@ const EnvironmentConfig: React.FC = () => {
         const parametros =
           images.length > 0
             ? {
-                name: data.nome,
-                description: data.descricao,
+                name: data.name,
+                description: data.description,
                 img: images[0].ResponseFileID,
-                enabled: data.enabled,
+                type: data.type,
+                entityType: data.entityType,
+                topic: data.topic,
+                simulationMode: data.simulationMode,
               }
             : {
-                name: data.nome,
-                description: data.descricao,
-                enabled: data.enabled,
+                name: data.name,
+                description: data.description,
+                type: data.type,
+                entityType: data.entityType,
+                topic: data.topic,
+                simulationMode: data.simulationMode,
               };
 
-        if (environmentID !== "-1") {
-          await api.put(`environments/${environmentID}`, parametros, {
-            headers: { "Content-Type": "application/json" },
-          });
+        await api.post(`equipments/${environmentID}`, parametros, {
+          headers: { "Content-Type": "application/json" },
+        });
 
-          addToast({
-            type: "success",
-            title: "Sucesso!",
-            description: "Ambiente atualizado com sucesso.",
-          });
-        } else {
-          await api.post("environments", parametros, {
-            headers: { "Content-Type": "application/json" },
-          });
+        addToast({
+          type: "success",
+          title: "Sucesso!",
+          description: "Ambiente atualizado com sucesso.",
+        });
 
-          addToast({
-            type: "success",
-            title: "Sucesso!",
-            description: "Ambiente cadastrado com sucesso.",
-          });
-        }
-
-        history.push("/configuration/environment");
+        handleEditEnvironment();
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -150,8 +121,8 @@ const EnvironmentConfig: React.FC = () => {
     [listAllFiles, addToast, history, environmentID]
   );
 
-  const handleNewEnvironment = () => {
-    history.push("/configuration/environment");
+  const handleEditEnvironment = () => {
+    history.push(`/configuration/environment/edit/${environmentID}`);
   };
 
   return (
@@ -164,25 +135,40 @@ const EnvironmentConfig: React.FC = () => {
                 <Legend>
                   <HiArrowNarrowLeft
                     color="#ff9000"
-                    onClick={handleNewEnvironment}
+                    onClick={handleEditEnvironment}
                   />
-                  Cadastro de ambiente
+                  Cadastro de equipamento
                 </Legend>
+                <Input name="name" icon={FaEdit} placeholder="Nome" />
                 <Input
-                  name="nome"
-                  icon={HiOutlineOfficeBuilding}
-                  placeholder="Nome"
-                />
-                <Textarea
-                  name="descricao"
-                  icon={HiOutlineInformationCircle}
+                  name="description"
+                  icon={FaEdit}
                   placeholder="Descrição"
                 />
+                <Select
+                  name="type"
+                  icon={FaEdit}
+                  placeholder="Caracteristica"
+                  options={[
+                    { value: "Sensor", label: "Sensor" },
+                    { value: "Atuador", label: "Atuador" },
+                  ]}
+                />
+                <Select
+                  name="entityType"
+                  icon={FaEdit}
+                  placeholder="Tipo"
+                  options={[
+                    { value: "boolean", label: "Boolean" },
+                    { value: "float", label: "Float" },
+                    { value: "int", label: "Int" },
+                    { value: "string", label: "String" },
+                  ]}
+                />
+                <Input name="topic" icon={FaEdit} placeholder="Tópico MQTT" />
                 <Upload />
                 <CheckboxGroup>
-                  <Checkbox name="enabled" checked>
-                    Ativado
-                  </Checkbox>
+                  <Checkbox name="simulationMode">Modo simulação</Checkbox>
                 </CheckboxGroup>
               </Fieldset>
               <Footer>
@@ -196,4 +182,4 @@ const EnvironmentConfig: React.FC = () => {
   );
 };
 
-export default EnvironmentConfig;
+export default EquipmentNew;

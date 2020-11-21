@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+
+import api from "../../services/api";
 
 import {
   LineChart,
@@ -17,6 +20,7 @@ import {
   FaTint,
   FaUsers,
   FaCloudSun,
+  FaArrowLeft,
 } from "react-icons/fa";
 
 import Base from "../../components/Base";
@@ -25,7 +29,7 @@ import GridItem from "../../components/GridItem";
 import CardStatus from "../../components/CardStatus";
 import CustomTabs from "../../components/CustomTabs";
 
-import { Chart } from "./styles";
+import { Chart, Header } from "./styles";
 
 const data = [
   {
@@ -154,10 +158,58 @@ const divStyle = {
   opacity: 0.8,
 };
 
+interface ParamsProps {
+  environmentID: string;
+}
+
+interface FileResponseProps {
+  _id: string;
+  name: string;
+  size: number;
+  key: string;
+  url: string;
+  createdAt: string;
+  _v: number;
+}
+
+interface responseData {
+  id: string;
+  name: string;
+  description: string;
+  img: FileResponseProps;
+  equipmentsOnline: number;
+  numberOfEquipments: number;
+  equipments: Array<string>;
+  events: Array<string>;
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const Teste: React.FC = () => {
+  const [environments, setEnvironments] = useState<responseData>();
+  const history = useHistory();
+  const { environmentID } = useParams<ParamsProps>();
+
+  useEffect(() => {
+    api.get(`/environments/byid/${environmentID}`).then((response) => {
+      setEnvironments(response.data);
+    });
+  }, []);
+
+  const handleHome = () => {
+    history.push(`/`);
+  };
+
   return (
     <Base>
       <GridContainer>
+        <GridItem xs={12}>
+          <Header onClick={handleHome}>
+            <FaArrowLeft color="#ff9000" />
+            <span>{environments?.name}</span>
+          </Header>
+        </GridItem>
         <GridItem xs={12} sm={6} md={3}>
           <CardStatus
             title="Temperatura"

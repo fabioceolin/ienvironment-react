@@ -7,9 +7,12 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
-import EnvironmentConfig from "../pages/Configuration/Environment";
+import Equipments from "../pages/Configuration/Equipments";
+import Environment from "../pages/Configuration/Environment";
 import EnvironmentEdit from "../pages/Configuration/EnvironmentEdit";
 import EnvironmentNew from "../pages/Configuration/EnvironmentNew";
+import EquipmentNew from "../pages/Configuration/EquipmentNew";
+import EventNew from "../pages/Configuration/EventNew";
 import Users from "../pages/Configuration/Users";
 import Target from "../pages/Configuration/Target";
 
@@ -20,21 +23,34 @@ const Routes: React.FC = () => {
       <Route path="/signup" component={SignUp} />
 
       <Route path="/home" component={Home} isPrivate />
-      <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/equipments" component={Equipments} isPrivate />
+      <Route path="/dashboard/:environmentID" component={Dashboard} isPrivate />
       <Route
         path="/configuration/environment"
         exact
-        component={EnvironmentConfig}
+        component={Environment}
         isPrivate
       />
       <Route
-        path="/configuration/environment/edit"
+        path="/configuration/environment/edit/:environmentID"
         exact
         component={EnvironmentEdit}
         isPrivate
       />
       <Route
-        path="/configuration/environment/new"
+        path="/configuration/environment/edit/:environmentID/equipment"
+        exact
+        component={EquipmentNew}
+        isPrivate
+      />
+      <Route
+        path="/configuration/environment/edit/:environmentID/event"
+        exact
+        component={EventNew}
+        isPrivate
+      />
+      <Route
+        path="/configuration/environment/new/:environmentID"
         exact
         component={EnvironmentNew}
         isPrivate
