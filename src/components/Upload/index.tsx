@@ -26,7 +26,7 @@ const Upload: React.FC = () => {
   const { addFile, listAllFiles, removeFile } = useUpload();
 
   const getUploadParams: IDropzoneProps["getUploadParams"] = () => ({
-    url: "http://localhost:8080/api/file",
+    url: process.env.REACT_APP_API_URL_FILE as string,
   });
 
   const handleChangeStatus: IDropzoneProps["onChangeStatus"] = (
