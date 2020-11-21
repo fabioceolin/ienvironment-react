@@ -37,6 +37,10 @@ export const AnimationContainer = styled.div`
 
   animation: ${appearFromRight} 1s;
 
+  img {
+    width: 90%;
+  }
+
   form {
     margin: 30px 0;
     width: 340px;
