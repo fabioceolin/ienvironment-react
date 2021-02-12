@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,12 +7,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="98mm"
-   height="29mm"
-   viewBox="0 0 97.999993 29"
+   width="620"
+   height="109.6063"
+   viewBox="0 0 164.04165 29"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
    sodipodi:docname="logo2.svg">
   <defs
      id="defs2" />
@@ -34,11 +32,12 @@
      inkscape:snap-midpoints="true"
      inkscape:snap-text-baseline="true"
      inkscape:window-width="1366"
-     inkscape:window-height="712"
-     inkscape:window-x="0"
-     inkscape:window-y="200"
+     inkscape:window-height="715"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     units="mm" />
+     units="px"
+     inkscape:document-rotation="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -58,7 +57,7 @@
      transform="translate(0,-268.00003)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.94842434px;line-height:1.25;font-family:Lora;-inkscape-font-specification:Lora;letter-spacing:0px;word-spacing:0px;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.34871081"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.9484px;line-height:1.25;font-family:Lora;-inkscape-font-specification:Lora;letter-spacing:0px;word-spacing:0px;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.348711"
        x="-0.35505641"
        y="286.53781"
        id="text12"><tspan
@@ -66,14 +65,14 @@
          id="tspan10"
          x="-0.35505641"
          y="286.53781"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.39999962px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';stroke-width:0.34871081"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.39999962px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#ff9000;fill-opacity:1;stroke-width:0.34871081"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';stroke-width:0.348711"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#ff9000;fill-opacity:1;stroke-width:0.348711"
            id="tspan933">i</tspan><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.39999962px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#f2f2f2;stroke-width:0.34871081"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#f2f2f2;stroke-width:0.348711"
            id="tspan937">Environment</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:Lora;-inkscape-font-specification:Lora;letter-spacing:0px;word-spacing:0px;opacity:0.9;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Lora;-inkscape-font-specification:Lora;letter-spacing:0px;word-spacing:0px;opacity:0.9;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="20.409321"
        y="294.8475"
        id="text941"><tspan
@@ -81,6 +80,6 @@
          id="tspan939"
          x="20.409321"
          y="294.8475"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.81944466px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#cccccc;stroke-width:0.26458332">Gerência e Inteligência</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.81944px;font-family:'Yanone Kaffeesatz';-inkscape-font-specification:'Yanone Kaffeesatz Bold';fill:#cccccc;stroke-width:0.264583">Gerência e Inteligência</tspan></text>
   </g>
 </svg>
